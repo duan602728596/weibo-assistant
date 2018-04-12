@@ -8,7 +8,7 @@ const sassConfig = require('./sass.config');
 /* 合并配置 */
 module.exports = config({
   output: {
-    path: path.join(__dirname, '../../build'),
+    path: path.join(__dirname, '../build'),
     filename: 'script/[name].js',
     chunkFilename: 'script/[name]_chunk.js'
   },

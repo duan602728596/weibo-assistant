@@ -165,9 +165,15 @@
 	},
 	"unpackage":[
 	  "README.md",
-	  ".git",
-	  ".idea",
-	  ".gitignore",
-	  ".project"
+	  "src",
+      "config",
+      "build",
+      "package.json",
+      "package-lock.json",
+      "yarn.lock",
+      "yarn-error.log",
+      "npm-debug.log",
+      "node_modules",
+	  ".idea"
 	]
 }
