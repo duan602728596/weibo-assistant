@@ -12,9 +12,9 @@
     },
     "launch_path": "build/index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
     "developer": {
-        "name": "",/*开发者名称*/
-        "email": "",/*开发者邮箱地址*/
-        "url": ""/*开发者个人主页地址*/
+        "name": "段昊辰",/*开发者名称*/
+        "email": "duanhaochen@126.com",/*开发者邮箱地址*/
+        "url": "https://github.com/duan602728596"/*开发者个人主页地址*/
     },
     "permissions": {
         "Messaging":{
@@ -133,5 +133,33 @@
                 }
             },"debug":true
         },"ads":{"rp":false,"splash":false,"push":false},"adid":""
-    },"fullscreen":false
+    },"fullscreen":false,
+	"dependencies":{
+		"pages": {
+			"build/index.html": {
+				"href": "build/index.html",
+				"resources": [
+					"build/style/app_753c620d1a456b16869f.css",
+					"build/script/dll_74fb6e36591dd819b8a318ea64d347fe.js",
+					"build/script/app_753c620d1a456b16869f.js"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"build/style/my_552b0d77526388f09e1d_chunk.css",
+				"LICENSE",
+				"build/file/user-tie_31e14b331a4434680db669cabb9e8a0d.svg",
+				"build/file/pencil_8809d3cf95ee20c74e5ebbdc6ee556da.svg",
+				"build/script/vendors~chaohua_checkin_580e6ed132fd81a6ae70_chunk.js",
+				"build/script/chaohua_checkin_014df22eae08aafb5cc0_chunk.js",
+				"build/style/vendors~chaohua_checkin_580e6ed132fd81a6ae70_chunk.css",
+				"build/image/001_c40f0c6a4275397eec2381ddfb70abff.jpg",
+				"build/style/chaohua_checkin_014df22eae08aafb5cc0_chunk.css",
+				"build/script/my_552b0d77526388f09e1d_chunk.js",
+				"README.md"
+			]
+		}
+	}
 }
