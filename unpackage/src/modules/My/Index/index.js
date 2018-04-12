@@ -24,7 +24,7 @@ class Index extends Component{
         <div className={ style.main }>
           <List className={ style.list }>
             <List.Item extra={ username }>账号</List.Item>
-            <List.Item extra="0.0.1">版本</List.Item>
+            <List.Item extra="0.0.2">版本</List.Item>
           </List>
           <Button className={ style.exit } type="warning" onClick={ this.onExit.bind(this) }>退出账号</Button>
         </div>
