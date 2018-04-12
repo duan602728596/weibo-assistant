@@ -163,15 +163,6 @@
 		}
 	},
 	"unpackage":[
-	  "build/file/pencil_8809d3cf95ee20c74e5ebbdc6ee556da.svg",
-	  "build/file/user-tie_31e14b331a4434680db669cabb9e8a0d.svg",
-	  "build/image/001_c40f0c6a4275397eec2381ddfb70abff.jpg",
-	  "build/script/chaohua_checkin_014df22eae08aafb5cc0_chunk.js",
-	  "build/script/my_552b0d77526388f09e1d_chunk.js",
-	  "build/script/vendors~chaohua_checkin_580e6ed132fd81a6ae70_chunk.js",
-	  "build/style/chaohua_checkin_014df22eae08aafb5cc0_chunk.css",
-	  "build/style/my_552b0d77526388f09e1d_chunk.css",
-	  "build/style/vendors~chaohua_checkin_580e6ed132fd81a6ae70_chunk.css",
-	  "LICENSE"
+		"README.md"
 	]
 }
