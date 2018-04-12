@@ -46,13 +46,13 @@ class Index extends Component{
             const cookie: string = xhr.getResponseHeader('set-cookie');
             window.localStorage.setItem('cookie', cookie);
             window.localStorage.setItem('username', username);
-            Toast.success('登录成功！', 1.5);
+            Toast.success('登录成功', 1.5);
             this.props.history.push('/');
           }else{
-            Toast.fail('登录失败！', 1.5);
+            Toast.fail(`（${ result.retcode }）${ result.msg }`, 1.5);
           }
         }else{
-          Toast.fail(`（${ result.retcode }）${ result.msg }！`, 1.5);
+          Toast.fail(`（${ result.retcode }）${ result.msg }`, 1.5);
         }
       }
     };
