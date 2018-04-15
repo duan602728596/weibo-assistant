@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { createSelector, createStructuredSelector } from 'reselect';
 import { NavBar, Icon, Button, List, Toast } from 'antd-mobile';
 import style from './style.sass';
-import { chaohuaList } from '../store/reducer';
+import { chaohuaList, chaohuaRequest, qiandaoRequest } from '../store/reducer';
 
 /* 初始化数据 */
 const state: Function = createStructuredSelector({
@@ -19,63 +19,15 @@ const state: Function = createStructuredSelector({
 /* dispatch */
 const dispatch: Function = (dispatch: Function): Object=>({
   action: bindActionCreators({
-    chaohuaList
+    chaohuaList,
+    chaohuaRequest,
+    qiandaoRequest
   }, dispatch)
 });
 
 @withRouter
 @connect(state, dispatch)
 class Index extends Component{
-  // 签到
-  requestCheckin(containerid: string): Promise{
-    const cookie: string = window.localStorage.getItem('cookie');
-    return new Promise((resolve: Function, reject: Function): void=>{
-      const xhr: XMLHttpRequest = new plus.net.XMLHttpRequest();
-      xhr.open('GET', `https://weibo.com/p/aj/general/button?api=http://i.huati.weibo.com/aj/super/checkin&id=${ containerid }`);
-      xhr.setRequestHeader('Cookie', cookie);
-      xhr.onreadystatechange = (event: Event): void=>{
-        if(xhr.readyState === 4){
-          if(xhr.status === 200){
-            // 判断是否签到成功
-            const result: Object = JSON.parse(xhr.responseText);
-            resolve(result);
-          }else{
-            reject(xhr.status);
-          }
-        }
-      };
-      xhr.send();
-    }).catch((err: any): void=>{
-      console.error(err);
-    });
-  }
-  // 加载超话列表
-  requestChaohuaList(sinceId: ?string): Promise{
-    let uri: string = 'https://m.weibo.cn/api/container/getIndex?containerid=100803_-_page_my_follow_super';
-    if(sinceId){
-      uri += `&since_id=${ encodeURIComponent(sinceId) }`;
-    }
-    const cookie: string = window.localStorage.getItem('cookie');
-    return new Promise((resolve: Function, reject: Function): void=>{
-      const xhr: XMLHttpRequest = new plus.net.XMLHttpRequest();
-      xhr.open('GET', uri);
-      xhr.setRequestHeader('Cookie', cookie);
-      xhr.onreadystatechange = (event: Event): void=>{
-        if(xhr.readyState === 4){
-          if(xhr.status === 200){
-            // 判断是否登录成功
-            const result: Object = JSON.parse(xhr.responseText);
-            resolve(result);
-          }else{
-            reject(xhr.status);
-          }
-        }
-      };
-      xhr.send();
-    }).catch((err: any): void=>{
-      console.error(err);
-    });
-  }
   // 解析超话数据
   chaohuaListData(rawArray: Array): Array{
     const list: [] = [];
@@ -96,6 +48,7 @@ class Index extends Component{
   }
   // 点击加载超话
   async onLoadChaohuaList(): Promise<void>{
+    const cookie: string = window.localStorage.getItem('cookie');
     try{
       // 加载超话
       Toast.loading('获取超级话题列表...', 0);
@@ -103,7 +56,15 @@ class Index extends Component{
       let sinceId: ?string = null;
       let isBreak: ?boolean = true;
       while(isBreak){
-        const rl: Object = await this.requestChaohuaList(sinceId);
+        const step1: Object = await this.props.action.chaohuaRequest({
+          pathname: {
+            sinceId: `&since_id=${ encodeURIComponent(sinceId) }`
+          },
+          headers: {
+            Cookie: cookie
+          }
+        });
+        const rl: Object = JSON.parse(step1.data);
         const cardlistInfo: Object = rl.data.cardlistInfo;
         const card_group: Object = rl.data.cards[0].card_group;
         list = list.concat(this.chaohuaListData(card_group)); // 循环card_group，提取数据
@@ -116,20 +77,27 @@ class Index extends Component{
       this.props.action.chaohuaList({
         data: list
       });
-      Toast.hide();
 
       // 签到
       Toast.loading('签到中...', 0);
       const chaohuaList: Array = this.props.chaohuaList;
       for(let i: number = 0, j: number = chaohuaList.length; i < j; i++){
         const item: Object = chaohuaList[i];
-        const res: Object = await this.requestCheckin(item.containerid);
+        const res2: Object = await this.props.action.qiandaoRequest({
+          pathname: {
+            containerid: item.containerid
+          },
+          headers: {
+            Cookie: cookie
+          }
+        });
+        const res: Object = JSON.parse(res2.data);
         if(res.code === '100000'){
           // 签到成功
           item.status = 1;
           item.text = res.data.alert_title;
-        }else if(res.code === 382004){
-          // 已签到
+        }else{
+          // 其他情况
           item.status = 0;
           item.text = res.msg;
         }
