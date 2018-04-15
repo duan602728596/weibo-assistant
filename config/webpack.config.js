@@ -11,7 +11,8 @@ function config(options){
       app: path.join(__dirname, '../src/app.js')
     },
     externals: {
-      jquery: 'window.jQuery'
+      Base64: 'window.Base64',
+      hint: 'window.hint'
     },
     module: {
       rules: [
