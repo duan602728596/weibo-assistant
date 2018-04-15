@@ -24,10 +24,9 @@ type requestArg = {
   url: string,
   method: string,
   successAction: ?Function,
-  defaultHeaders: Object,
-  defaultData: Object
+  defaultHeaders: Object
 };
-export function request({ url, method = 'GET', successAction, defaultHeaders = {}, defaultData }: requestArg): Function{
+export function request({ url, method = 'GET', successAction, defaultHeaders = {} }: requestArg): Function{
   /**
    * 异步action
    * @param { ?Object } pathname: 替换模板的对象
@@ -36,7 +35,7 @@ export function request({ url, method = 'GET', successAction, defaultHeaders = {
    */
   type actionArg = {
     pathname: ?Object,
-    data: ?Object,
+    data: string,
     headers: Object
   };
   return function(arg: actionArg): Function{
@@ -47,14 +46,6 @@ export function request({ url, method = 'GET', successAction, defaultHeaders = {
     if(headers) Object.assign(headers1, headers);
     // url
     const tpUrl: string = pathname ? templateReplace(url, pathname) : url;
-    // data
-    let data1: Object | Array;
-    if(defaultData){
-      data1 = Object.assign(defaultData instanceof Array ? [] : {}, defaultData);
-      if(data) Object.assign(data1, data);
-    }else{
-      if(data) data1 = data;
-    }
     // dispatch
     return function(dispatch: Function): Promise{
       return new Promise((resolve: Function, reject: Function): void=>{
@@ -70,7 +61,8 @@ export function request({ url, method = 'GET', successAction, defaultHeaders = {
           if(xhr.readyState === 4){
             resolve({
               status: xhr.status,
-              data: xhr.responseText
+              data: xhr.responseText,
+              xhr
             });
           }
         };

@@ -82,7 +82,7 @@
   /* 初始化各种对象 */
   var START = 'ontouchstart' in document ? 'touchstart' : 'mousedown';
   var MOVE = 'ontouchmove' in document ? 'touchmove' : 'mousemove';
-  var END = 'ontouchend' in document ? 'touchdown' : 'mouseup';
+  var END = 'ontouchend' in document ? 'touchend' : 'mouseup';
 
   var father = null;
   var fobj = null;
@@ -205,7 +205,6 @@
     };
     _document.dispatchEvent(event2);
     onReset();
-    // console.log(`id=${ window.yanzhengid }&path_enc=${ p.encode(zuobiao.join(''), window.yanzhengid) }&data_enc=${ q.encode(trace) }`);
   }
 
   function onReset(event){
