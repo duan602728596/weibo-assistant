@@ -1,11 +1,12 @@
 # 微博助手
 
 ## 功能
+* 登录支持手势验证（四宫格）
 * 微博超级话题自动签到功能
 
 ## 开发环境
 使用webpack、react、antd-mobile、HBuilder进行开发，使用appuploader创建证书。
 
 ## 下载地址
-* IOS：[https://pan.baidu.com/s/1XmA6qKM8aqzHUR9bM4POsA](https://pan.baidu.com/s/1XmA6qKM8aqzHUR9bM4POsA)（IOS只有越狱版本）
-* 安卓：[https://pan.baidu.com/s/1i-cwn3BfPBi34N0_5fYreA](https://pan.baidu.com/s/1i-cwn3BfPBi34N0_5fYreA)
+* IOS（越狱版本）：[https://pan.baidu.com/s/1PK9YEjXrP7yi7Pje3s5P2g](https://pan.baidu.com/s/1PK9YEjXrP7yi7Pje3s5P2g)
+* 安卓：[https://pan.baidu.com/s/1Vct5X29LORlrGwfXSuVXug](https://pan.baidu.com/s/1Vct5X29LORlrGwfXSuVXug)
