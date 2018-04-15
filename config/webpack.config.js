@@ -18,10 +18,10 @@ function config(options){
         { // react & js
           test: /^.*\.js$/,
           use: [babelConfig],
-          exclude: /(dll\.js|node_modules)/
+          exclude: /(js-base64|weibo-pattlock|dll\.js|node_modules)/
         },
         {
-          test: /(dll\.js)/,
+          test: /(js-base64|weibo-pattlock|dll\.js)/,
           use: [
             {
               loader: 'file-loader',
