@@ -238,7 +238,7 @@
       e = l / h;
       f = m / i;
       g = '-' + j[n] % h * e + 'px -' + parseInt(j[n] / h) * f + 'px';
-      html += `<div class="pattern-children" style="background-image: ${ bgUrl }; background-position: ${ g };"></div>`;
+      html += '<div class="pattern-children" style="background-image: ' + bgUrl + '; background-position: ' + g + ';"></div>';
     }
     _document.getElementById('pattern').innerHTML = html;
   }
@@ -256,7 +256,7 @@
     codeId = id;
     if(imageUrl){
       const u = imageUrl.split('|');
-      const bg = `url(${ u[0] })`;
+      const bg = 'url(' + u[0] + ')';
       const lock = Base64.decode(u[1]).split('_');
       recombineShadow(bg, lock);
     }
