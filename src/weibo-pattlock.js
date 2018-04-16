@@ -233,8 +233,8 @@
    * @param { Array<string> } lock
    */
   function recombineShadow(bgUrl, lock){
-    let html = '';
-    for(let e, f, g, h = lock[0], i = lock[1], j = lock.slice(2), l = 160, m = 160, n = 0; n < j.length; n++){
+    var html = '';
+    for(var e, f, g, h = lock[0], i = lock[1], j = lock.slice(2), l = 160, m = 160, n = 0; n < j.length; n++){
       e = l / h;
       f = m / i;
       g = '-' + j[n] % h * e + 'px -' + parseInt(j[n] / h) * f + 'px';
