@@ -52,18 +52,20 @@ class Index extends Component{
     });
   }
   // 登录
-  async login(username: string, password: string, hasToast: boolean): Promise<void>{
+  async login(username: string, password: string, vid: ?string): Promise<void>{
     try{
+      let data: string = `username=${ username }&password=${ password }`;
+      if(vid) data += `&vid=${ vid }`;
       const step4: Object = await this.props.action.loginRequest({
-        data: `username=${ username }&password=${ password }`
+        data
       });
       if(!(step4 && step4.status === 200)){
-        if(hasToast)Toast.hide();
+        if(vid)Toast.hide();
         Toast.fail('登录失败', 1.5);
         return void 0;
       }
       const step4Data: Object = JSON.parse(step4.data);
-      if(hasToast)Toast.hide();
+      if(vid)Toast.hide();
       if(step4Data.retcode === 20000000){
         const cookie: string = step4.xhr.getResponseHeader('set-cookie');
         window.localStorage.setItem('cookie', cookie);
@@ -130,7 +132,7 @@ class Index extends Component{
             }
             const step3Data: Object = JSON.parse(step3.data.replace(/[()]/g, ''));
             if(step3Data.code === '100000'){
-              this.login(username, password, true);
+              this.login(username, password, step2Data.id);
             }else{
               Toast.fail(`（${ step3Data.code }）${ step3Data.msg }`, 1.5);
             }
