@@ -6,26 +6,26 @@
 
 /**
  1、【GET】https://login.sina.com.cn/sso/prelogin.php?checkpin=1&entry=mweibo&su=aHR5d29ya18wQHNpbmEuY29t&callback=jsonpcallback1523621527728
- 判断是否需要验证码
- su：base64的用户名
- 返回：showpin=1，需要验证码
+    判断是否需要验证码
+    su：base64的用户名
+    返回：showpin=1，需要验证码
 
  2、【GET】https://captcha.weibo.com/api/pattern/get?ver=1.0.0&source=ssologin&usrname=htywork_0@sina.com&line=160&side=100&radius=30&_rnd=0.053927914628985496&callback=pl_cb
- 获取验证码
- 返回：id：当前id，path_enc：验证码地址
+    获取验证码
+    返回：id：当前id，path_enc：验证码地址
 
  3、【GET】https://captcha.weibo.com/api/pattern/verify?ver=1.0.0&id=29218517fb4894ae45ec0d1c80f93d54b8c80f93d54b&usrname=htywork_0@sina.com&source=ssologin&path_enc=&data_enc=&callback=pl_cb
- 验证验证码
- ver: 1.0.0
- id
- usrname: htywork_0@sina.com
- source: ssologin
- path_enc：路径和id的算法
- data_enc：路径坐标的算法
- 返回：code："100000"，msg："验证成功"
- code："100001"，msg："验证码已过期"
- code："100002"，msg："验证错误"
- code："100004"，msg："轨迹验证错误"
+    验证验证码
+    ver: 1.0.0
+    id
+    usrname: htywork_0@sina.com
+    source: ssologin
+    path_enc：路径和id的算法
+    data_enc：路径坐标的算法
+    返回：code："100000"，msg："验证成功"
+         code："100001"，msg："验证码已过期"
+         code："100002"，msg："验证错误"
+         code："100004"，msg："轨迹验证错误"
  */
 
 (function(_document, _window){
@@ -80,9 +80,9 @@
   }
 
   /* 初始化各种对象 */
-  var START = 'ontouchstart' in document ? 'touchstart' : 'mousedown';
-  var MOVE = 'ontouchmove' in document ? 'touchmove' : 'mousemove';
-  var END = 'ontouchend' in document ? 'touchend' : 'mouseup';
+  var START = 'ontouchstart' in _document ? 'touchstart' : 'mousedown';
+  var MOVE = 'ontouchmove' in _document ? 'touchmove' : 'mousemove';
+  var END = 'ontouchend' in _document ? 'touchend' : 'mouseup';
 
   var father = null;
   var fobj = null;
@@ -92,7 +92,7 @@
   function initArgv(){
     father =_document.getElementById('pattern-father');
     fobj = father.getBoundingClientRect();
-    canvas = document.getElementById('pattern-canvas');
+    canvas = _document.getElementById('pattern-canvas');
     ctx = canvas.getContext('2d');
   }
 
@@ -172,7 +172,7 @@
     if(z !== null && zuobiao.indexOf(z) < 0) zuobiao.push(z);
     //
     ctx.beginPath();
-    ctx.moveTo(...old);
+    ctx.moveTo(old[0], old[1]);
     ctx.lineTo(sx, sy);
     ctx.stroke();
     old = [sx, sy];
@@ -193,7 +193,7 @@
     if(z !== null && zuobiao.indexOf(z) < 0) zuobiao.push(z);
     //
     ctx.beginPath();
-    ctx.moveTo(...old);
+    ctx.moveTo(old[0], old[1]);
     ctx.lineTo(sx, sy);
     ctx.stroke();
     old = null;
@@ -240,7 +240,7 @@
       g = '-' + j[n] % h * e + 'px -' + parseInt(j[n] / h) * f + 'px';
       html += `<div class="pattern-children" style="background-image: ${ bgUrl }; background-position: ${ g };"></div>`;
     }
-    document.getElementById('pattern').innerHTML = html;
+    _document.getElementById('pattern').innerHTML = html;
   }
 
   /**
