@@ -24,7 +24,7 @@ const list: Array<{
 @withRouter
 class Index extends Component{
   // 判断local storage里面是否有数据
-  componentWillMount(): void{
+  UNSAFE_componentWillMount(): void{
     const cookie: ?string = window.localStorage.getItem('cookie');
     const username: ?string = window.localStorage.getItem('username');
     if(!(username && cookie)){

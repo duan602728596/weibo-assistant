@@ -41,7 +41,7 @@ class Index extends Component{
       password: ''    // 密码
     };
   }
-  componentWillMount(): void{
+  UNSAFE_componentWillMount(): void{
     window.localStorage.removeItem('cookie');
     window.localStorage.removeItem('username');
   }
