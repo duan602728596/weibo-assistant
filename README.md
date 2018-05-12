@@ -8,5 +8,5 @@
 使用webpack、react、antd-mobile、HBuilder进行开发，使用appuploader创建证书。
 
 ## 下载地址
-* IOS（越狱版本）：[https://pan.baidu.com/s/15YUXXZP41t-z1MFbOS-MKg](https://pan.baidu.com/s/15YUXXZP41t-z1MFbOS-MKg)
-* 安卓：[https://pan.baidu.com/s/1vHW-vFdHZcemoDSinzN_ew](https://pan.baidu.com/s/1vHW-vFdHZcemoDSinzN_ew)
+* IOS（越狱版本）：[https://pan.baidu.com/s/1Zbuy2C7G292hGo1vq9Xh2g](https://pan.baidu.com/s/1Zbuy2C7G292hGo1vq9Xh2g)
+* 安卓：[https://pan.baidu.com/s/17RJWxgrBnKJwtvu6zhBytA](https://pan.baidu.com/s/17RJWxgrBnKJwtvu6zhBytA)
