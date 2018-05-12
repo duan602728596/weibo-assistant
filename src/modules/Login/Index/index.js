@@ -96,7 +96,7 @@ class Index extends Component{
         return void 0;
       }
       const step1Data: Object = JSON.parse(step1.data.replace(/\n/g, '\\n'));
-      if('showpin' in step1Data && step1Data.showpin === 1){
+      if(('showpin' in step1Data && step1Data.showpin === 1) || ('smsurl' in step1Data)){
         // 需要手势验证，获取验证码
         const step2: Object = await this.props.action.getCaptchaRequest({
           pathname: {

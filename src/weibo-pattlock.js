@@ -46,7 +46,7 @@
 
   /* 初始化css样式 */
   function initStyle(){
-    var style = '.pattern-dialog { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .7); }\n'
+    var style = '.pattern-dialog { position: fixed; z-index: 99; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .7); }\n'
               + '.pattern-father, .pattern { width: 160px; height: 160px; background-color: #fff; }\n'
               + '.pattern-father { position: absolute; top: 50%; left: 50%; margin: -80px 0 0 -80px; }\n'
               + '.pattern:after { content: \'\\200B\'; display: block; height: 0; clear: both; }\n'

@@ -95,11 +95,11 @@ class Index extends Component{
         if(res.code === '100000'){
           // 签到成功
           item.status = 1;
-          item.text = res.data.alert_title;
+          item.text = res.code;  // res.data.alert_title;
         }else{
           // 其他情况
           item.status = 0;
-          item.text = res.msg;
+          item.text = res.code;  // res.msg;
         }
       }
       this.props.action.chaohuaList({
@@ -138,10 +138,15 @@ class Index extends Component{
       <Fragment>
         <NavBar mode="dark" icon={ <Icon type="left" /> } onLeftClick={ this.onBack.bind(this) }>超话签到</NavBar>
         <Button className={ style.btn } onClick={ this.onLoadChaohuaList.bind(this) }>开始自动签到</Button>
-        { /* 渲染超话列表 */
-          this.props.chaohuaList.length > 0 ? (
-            <List>{ this.chaohuaListView() }</List>
-          ) : null
+        {
+          /* 渲染超话列表 */
+          do{
+            if(this.props.chaohuaList.length > 0){
+              <List>{ this.chaohuaListView() }</List>;
+            }else{
+              null;
+            }
+          }
         }
       </Fragment>
     );
