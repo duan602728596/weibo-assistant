@@ -1,0 +1,3 @@
+rootProject.name = 'weibo_assistant'
+
+include ':app'

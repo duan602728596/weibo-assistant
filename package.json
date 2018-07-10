@@ -1,0 +1,44 @@
+{
+  "name": "weibo-assistant",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "iosdev": "./node_modules/.bin/react-native run-ios",
+    "eslint": "./node_modules/.bin/eslint ./",
+    "get-version": "node scripts/get-version.js"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "7.0.0-beta.47",
+    "@babel/plugin-proposal-do-expressions": "7.0.0-beta.47",
+    "@babel/plugin-proposal-export-default-from": "7.0.0-beta.47",
+    "antd-mobile-rn": "^2.2.0",
+    "babel-eslint": "^9.0.0-beta.2",
+    "babel-jest": "^23.2.0",
+    "babel-plugin-import": "^1.8.0",
+    "babel-preset-react-native": "^5.0.2",
+    "core-js": "^2.5.7",
+    "eslint": "^5.1.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-react": "^7.10.0",
+    "immutable": "^4.0.0-rc.9",
+    "jest": "^23.3.0",
+    "prop-types": "^15.6.2",
+    "rc-form": "^2.2.0",
+    "react": "^16.4.1",
+    "react-native": "^0.56.0",
+    "react-native-storage": "^0.2.2",
+    "react-redux": "^5.0.7",
+    "react-router-native": "^4.3.0",
+    "react-test-renderer": "^16.4.1",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.4.0",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^3.0.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

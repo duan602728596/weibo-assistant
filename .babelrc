@@ -1,0 +1,22 @@
+{
+  "presets": [
+    "react-native"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-do-expressions",
+    [
+      "import",
+      {
+        "libraryName": "antd-mobile-rn",
+        "libraryDirectory": "es"
+      }
+    ]
+  ]
+}
