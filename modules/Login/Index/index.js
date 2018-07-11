@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-native';
 import { createForm } from 'rc-form';
 import style from './style';
 import { yanzheng, getCaptcha, yanzhengCaptcha, loginWeibo, pathEncCount, dataEncCount } from './loginWeibo';
+import { USER_LIST, USER } from '../../../components/storage/key';
 
 @withRouter
 @createForm()
@@ -26,6 +27,21 @@ class Login extends Component{
     isModalDisplay: false  // 手势验证modal是否显示
   };
 
+  // 登陆事件
+  handleLogin: Function = (event: Event): void=>{
+    this.props.form.validateFields((error: any, value: Object): void=>{
+      const usernameValue: string = value?.username || '';
+      const passwordValue: string = value?.password || '';
+      // 判断是否输入了用户名和密码
+      if(/^\s*$/.test(usernameValue)){
+        Toast.fail('请输入用户名！');
+      }else if(passwordValue === ''){
+        Toast.fail('请输入密码！', 1.5);
+      }else{
+        this.weiboYanzheng(usernameValue, passwordValue);
+      }
+    });
+  };
   // 判断是否需要验证码
   async weiboYanzheng(username: string, password: string): Promise<void>{
     try{
@@ -55,28 +71,13 @@ class Login extends Component{
       console.error(err);
     }
   }
-  // 登陆事件
-  onLogin: Function = (event: Event): void=>{
-    this.props.form.validateFields((error: any, value: Object): void=>{
-      const usernameValue: string = value?.username || '';
-      const passwordValue: string = value?.password || '';
-      // 判断是否输入了用户名和密码
-      if(/^\s*$/.test(usernameValue)){
-        Toast.fail('请输入用户名！');
-      }else if(passwordValue === ''){
-        Toast.fail('请输入密码！', 1.5);
-      }else{
-        this.weiboYanzheng(usernameValue, passwordValue);
-      }
-    });
-  };
   // 加载成功
-  onWebViewLoad: Function = (event: Event): void=>{
+  handleWebViewLoad: Function = (event: Event): void=>{
     const js: string = `initLujing('${ this.pathEnc }'); initCanvas(); initFunction();`;
     this.touchRef.current.injectJavaScript(js);
   };
   // 触摸回调事件
-  onWebViewMessage: Function = async(event: Event): void=>{
+  handleWebViewMessage: Function = async(event: Event): void=>{
     try{
       const data: {
         trace: Array<number[]>,
@@ -114,7 +115,7 @@ class Login extends Component{
         Toast.success('登录成功！', 1.5);
         // 存储微博登陆列表
         global['storage'].save({
-          key: 'userlist',
+          key: USER_LIST,
           id: this.username,
           data: {
             username: this.username,
@@ -124,12 +125,13 @@ class Login extends Component{
         });
         // 存储当前选择的用户
         global['storage'].save({
-          key: 'user',
+          key: USER,
           data: {
             username: this.username
           },
           expires: null
         });
+
         this.props.history.push('/');
       }else{
         Toast.fail(`（${ data.retcode }）${ data.msg }`, 1.5);
@@ -140,7 +142,7 @@ class Login extends Component{
     }
   }
   // 关闭弹出层
-  onClose: Function = (): void=>{
+  handleClose: Function = (): void=>{
     this.setState({
       isModalDisplay: false
     });
@@ -155,7 +157,7 @@ class Login extends Component{
             <InputItem clear={ true } { ...getFieldProps('username') }>用户名：</InputItem>
             <InputItem type="password" clear={ true } { ...getFieldProps('password') }>密码：</InputItem>
           </List>
-          <Button style={ style.subBtn } type="primary" onClick={ this.onLogin }>登陆</Button>
+          <Button style={ style.subBtn } type="primary" onClick={ this.handleLogin }>登陆</Button>
         </View>
         { /* 手势验证 */
           do{
@@ -163,7 +165,7 @@ class Login extends Component{
               (
                 <View style={ style.shoushiModal }>
                   <Text style={ style.shoushiModalTitle }>请进行手势验证</Text>
-                  <TouchableOpacity style={ style.close } activeOpacity={ 0.8 } onPress={ this.onClose }>
+                  <TouchableOpacity style={ style.close } activeOpacity={ 0.8 } onPress={ this.handleClose }>
                     <Image style={ style.closeIcon } source={ require('./image/close.png') } />
                   </TouchableOpacity>
                   <View style={ style.shoushiBox }>
@@ -171,8 +173,8 @@ class Login extends Component{
                       style={ style.huadongView }
                       source={ require('./huadong/huadong.html') }
                       scrollEnabled={ false }
-                      onLoad={ this.onWebViewLoad }
-                      onMessage={ this.onWebViewMessage }
+                      onLoad={ this.handleWebViewLoad }
+                      onMessage={ this.handleWebViewMessage }
                     />
                   </View>
                 </View>

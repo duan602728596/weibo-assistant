@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-native';
 import { Grid, Card, WingBlank, Button } from 'antd-mobile-rn';
 import style from './style';
 import { username } from '../store/reducer';
+import { USER } from '../../../components/storage/key';
 
 /* 初始化数据 */
 const state: Function = createStructuredSelector({
@@ -28,6 +29,7 @@ const dispatch: Function = (dispatch: Function): Object=>({
 @connect(state, dispatch)
 class Index extends Component{
   static propTypes = {
+    username: PropTypes.string,
     action: PropTypes.objectOf(PropTypes.func),
     history: PropTypes.object
   };
@@ -36,7 +38,7 @@ class Index extends Component{
     try{
       // 判断当前登陆的用户
       const data: Object = await global['storage'].load({
-        key: 'user'
+        key: USER
       });
       if(data === null){
         this.props.history.push('/Login');
@@ -72,7 +74,7 @@ class Index extends Component{
               <Text key="username">{ this.props.username }</Text>
             ]}
           />
-          <Card.Body style={ style.cardBody }>
+          <Card.Body>
             <Grid data={ this.gridData() } columnNum={ 3 } hasLine={ false } />
           </Card.Body>
         </Card>

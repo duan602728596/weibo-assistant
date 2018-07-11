@@ -4,6 +4,7 @@
 
 import { AsyncStorage } from 'react-native';
 import Storage from 'react-native-storage';
+import { USER_LIST, USER } from './key';
 
 export const storage: Storage = new Storage({
   // 最大容量，默认值1000条数据循环存储
@@ -16,8 +17,8 @@ export const storage: Storage = new Storage({
   // 读写时在内存中缓存数据。默认启用。
   enableCache: true,
   sync: {
-    userlist: (params: Object): void => params.resolve(null),
-    user: (params: Object): void => params.resolve(null)
+    [USER_LIST]: (params: Object): void => params.resolve(null),
+    [USER]: (params: Object): void => params.resolve(null)
   }
 });
 
